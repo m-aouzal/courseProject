@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/core';
 
 @Component({
     templateUrl: './header.component.html',
@@ -8,5 +8,12 @@ import { Component, OnInit } from '@angular/core';
 )
 export class HeaderComponent {
     collapsed = true;
-}
+    @Output() componentSelected: EventEmitter<String> = new EventEmitter();
+    
 
+    onSelect(elementSelected:string) {
+        this.componentSelected.emit(elementSelected);
+    }
+
+    
+}

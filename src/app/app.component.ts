@@ -7,4 +7,23 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'courseProject';
+  recipeTemplate = true;
+  shoppingTemplate = false;
+
+  componentSelected : String = '';
+
+  goToComponent(event) {
+   if (event === 'recipe') {
+    this.recipeTemplate = true;
+    this.shoppingTemplate = false;
+   }
+   else {
+    this.recipeTemplate = false;
+    this.shoppingTemplate = true;
+   }
+
+  }
+
+  
+
 }
