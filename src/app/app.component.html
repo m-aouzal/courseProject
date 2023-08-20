@@ -1,9 +1,8 @@
-<app-header  (componentSelected)="goToComponent(componentSelected =$event)"></app-header>
-<div class="container">
+<app-header *ngIf="!pageNotFound"></app-header>
+<div [ngClass]="{'container': !pageNotFound, 'container-all': pageNotFound}">
   <div class="row">
     <div class="col-md-12">
-      <app-recipes *ngIf="componentSelected === 'recipe'"></app-recipes>
-      <app-shopping-list *ngIf="componentSelected != 'recipe'"></app-shopping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

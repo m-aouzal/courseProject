@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <h2>{{ editMode ? 'Edit Recipe' : 'Create New Recipe' }}</h2>
+    <form (ngSubmit)="onSubmit()">
+      <!-- Conditionally render the ID input for create mode -->
+      <div class="form-group" *ngIf="!editMode">
+        <label for="id">ID</label>
+        <input type="number" min="0" class="form-control" id="id" [(ngModel)]="recipe.id" name="id">
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="recipe.name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" [(ngModel)]="recipe.description" name="description" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="imagePath">Image Path</label>
+        <input type="text" class="form-control" id="imagePath" [(ngModel)]="recipe.imagePath" name="imagePath">
+      </div>
+      <div class="form-group">
+        <label for="ingredients">Ingredients</label>
+        <ul class="list-group">
+          <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="list-group-item">
+            <input type="text" class="form-control" [(ngModel)]="ingredient.name" name="ingredient-{{i}}">
+          </li>
+        </ul>
+      </div>
+      <button type="submit" class="btn btn-success">{{ editMode ? 'Save' : 'Create' }}</button>
+      <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+  

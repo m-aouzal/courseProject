@@ -8,12 +8,6 @@ import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/cor
 )
 export class HeaderComponent {
     collapsed = true;
-    @Output() componentSelected: EventEmitter<String> = new EventEmitter();
-    
-
-    onSelect(elementSelected:string) {
-        this.componentSelected.emit(elementSelected);
-    }
-
+   
     
 }

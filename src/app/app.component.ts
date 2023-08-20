@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -6,24 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'courseProject';
-  recipeTemplate = true;
-  shoppingTemplate = false;
+ 
+  pageNotFound: boolean = false;
 
-  componentSelected : String = '';
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  goToComponent(event) {
-   if (event === 'recipe') {
-    this.recipeTemplate = true;
-    this.shoppingTemplate = false;
-   }
-   else {
-    this.recipeTemplate = false;
-    this.shoppingTemplate = true;
-   }
-
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.pageNotFound = event.urlAfterRedirects.includes('404');
+      });
   }
 
   
-
 }
