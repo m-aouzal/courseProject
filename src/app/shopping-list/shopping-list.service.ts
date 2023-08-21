@@ -9,7 +9,7 @@ export class ShoppingListService {
 
   ingredients: Ingredient[] = [new Ingredient("Apples", 5), new Ingredient("Tomatoes", 10)];
   ingredientAdded : Subject<Ingredient[]> = new Subject<Ingredient[]>();
-  ingredientEdited : Subject<Ingredient>;
+  ingredientEdited : Subject<number> = new Subject<number>();
 
   getIngredients(){
     return this.ingredients.slice();
@@ -17,7 +17,7 @@ export class ShoppingListService {
 
   addIngredient(ingredient : Ingredient): void {
     this.ingredients.push(ingredient);
-    this.ingredientAdded.next(this.ingredients);
+    this.ingredientAdded.next(this.ingredients.slice());
   }
 
   addIngredients(ingredients : Ingredient[]): void {
@@ -25,16 +25,18 @@ export class ShoppingListService {
     this.ingredientAdded.next(this.ingredients);
   }
 
+  deleteIngredient(index : number){
+    this.ingredients.splice(index, 1);
+    this.ingredientAdded.next(this.ingredients);
+  }
+
   getIngredient(index : number): Ingredient{
     return this.ingredients[index];
   }
 
-  updateIngredient(ingredient : Ingredient) {
-    let index = this.ingredients.findIndex((ingredient) => {
-      return ingredient.name === ingredient.name;
-    });
+  updateIngredient(index:number,ingredient : Ingredient) {
     this.ingredients[index] = ingredient;
-    this.ingredientAdded.next(this.ingredients);
+    this.ingredientAdded.next(this.ingredients.slice());
   }
 
 
