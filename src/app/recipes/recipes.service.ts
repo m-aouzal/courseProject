@@ -40,6 +40,11 @@ export class RecipesService {
     this.recipes.push(recipe);
     this.recipeAdded.next(this.recipes.slice());
   }
+
+  deleteRecipe(index:number):void {
+    this.recipes.splice(index,1);
+    this.recipeAdded.next(this.recipes.slice());
+  }
   
  
 
