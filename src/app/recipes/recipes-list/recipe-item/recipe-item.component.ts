@@ -2,6 +2,7 @@ import { Component,Input} from '@angular/core';
 import { Recipe } from "../../recipe.model"
 
 import { Router} from '@angular/router';
+import { RecipesService } from '../../recipes.service';
 
 
 @Component({
@@ -16,8 +17,11 @@ export class RecipeItemComponent  {
 
 
 
-  constructor( private router :Router) { }
-  onSelect(): void {
-    this.router.navigate(['/recipes',this.recipe.id]);  
-  };
+  constructor( private router :Router,private recipeService: RecipesService) { }
+ 
+
+  goToRecipe(recipe:Recipe):void {
+    let index = this.recipeService.getRecipeIndex(recipe);
+    this.router.navigate(['/recipes',index]);
+  }
 }

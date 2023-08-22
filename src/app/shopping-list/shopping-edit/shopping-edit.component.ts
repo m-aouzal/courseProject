@@ -32,7 +32,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     });
 
 
-    this.shoppingListService.ingredientEdited.subscribe((index: number) => {
+    this.ingredientSub = this.shoppingListService.ingredientEdited.subscribe((index: number) => {
       this.editMode = true;
       this.ingredientIndex = index;
       const ingredient = this.shoppingListService.getIngredient(index);

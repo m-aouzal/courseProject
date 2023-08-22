@@ -1,33 +1,83 @@
 <div class="container mt-4">
-    <h2>{{ editMode ? 'Edit Recipe' : 'Create New Recipe' }}</h2>
-    <form (ngSubmit)="onSubmit()">
-      <!-- Conditionally render the ID input for create mode -->
-      <div class="form-group" *ngIf="!editMode">
-        <label for="id">ID</label>
-        <input type="number" min="0" class="form-control" id="id" [(ngModel)]="recipe.id" name="id">
-      </div>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="recipe.name" name="name">
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" [(ngModel)]="recipe.description" name="description" rows="4"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="imagePath">Image Path</label>
-        <input type="text" class="form-control" id="imagePath" [(ngModel)]="recipe.imagePath" name="imagePath">
-      </div>
-      <div class="form-group">
-        <label for="ingredients">Ingredients</label>
-        <ul class="list-group">
-          <li *ngFor="let ingredient of recipe.ingredients; let i = index" class="list-group-item">
-            <input type="text" class="form-control" [(ngModel)]="ingredient.name" name="ingredient-{{i}}">
-          </li>
-        </ul>
-      </div>
-      <button type="submit" class="btn btn-success">{{ editMode ? 'Save' : 'Create' }}</button>
-      <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancel</button>
-    </form>
+  <div class="row">
+    <div class="col-xs-10">
+      <h2>{{ editMode ? 'Edit Recipe' : 'Create New Recipe' }}</h2>
+      <form (ngSubmit)="onSubmit()" [formGroup]="RecipeEditForm">
+        <div class="row">
+          <div class="col-xs-3">
+            <button type="submit" class="btn btn-success" [disabled]="RecipeEditForm.invalid">{{ editMode ? 'Save' :
+              'Create' }}</button>
+          </div>
+          <div class="col-xs-4">
+            <button type="button" class="btn btn-secondary " (click)="cancelEdit()">Cancel</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" rows="4" formControlName="description"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="form-group">
+              <label for="imagePath">Image Path</label>
+              <input type="text" class="form-control" id="imagePath" formControlName="imagePath">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10 m-3">
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="{{ this.RecipeEditForm.value.imagePath }}" style="max-height: 200px;" class="img-responsive">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row" formArrayName="ingredientsArray">
+
+          <div class="col-xs-10 m-3" *ngFor="let ingredient of ingredientsArray.controls; let i=index">
+            <div class="row" [formGroupName]="i">
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" class="form-control" formControlName="name">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="amount">Amount</label>
+                  <input type="number" class="form-control" id="amount" min="0" formControlName="amount">
+                </div>
+              </div>
+              <div class="col-sm-2 align-middle"  style=" vertical-align: bottom !important">
+                <div class="form-group">
+                  <button type="button" class="btn btn-danger" (click)="deleteIngredient(i)">Delete</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            <button type="button" class="btn btn-primary" (click)="addIngredient()">Add Ingredient</button>
+          </div>
+
+
+        </div>
+      </form>
+    </div>
   </div>
-  
+</div>
