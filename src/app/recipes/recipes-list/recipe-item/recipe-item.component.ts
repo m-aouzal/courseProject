@@ -11,7 +11,7 @@ import { RecipesService } from '../../recipes.service';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent  {
-  @Input() recipe: Recipe = new Recipe();
+  @Input() recipe: Recipe;
 
   isClicked : boolean = false;
 

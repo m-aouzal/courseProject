@@ -12,11 +12,14 @@ import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { LoginComponent } from './login/login.component';
 
+
 // Import your components that you want to route to
 import { blockLoginGuard } from './guards/block-login.guard';
 import { AuthGuard } from './guards/auth-can-activate.guard';
 import { authDeActivateGuard } from './guards/auth-de-activate.guard';
 import { authCanActivateChildrenGuard } from './guards/auth-can-activate-children.guard';
+
+import { RecipesResolverService } from './recipes/RecipesResolver.service';
 
 
 
@@ -47,9 +50,11 @@ const routes: Routes = [
       { path: '', component: RecipeStartComponent },
       { path: 'new', 
       canDeactivate: [authDeActivateGuard],
+      // resolve: [RecipesResolverService ],
       component: RecipeEditComponent },
       { path: ':id', component: RecipesDetailComponent },
       { path: ':id/edit', 
+      // resolve: [RecipesResolverService ],
       canDeactivate: [authDeActivateGuard],
       component: RecipeEditComponent }
     ]

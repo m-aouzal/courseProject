@@ -2,6 +2,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 import { Subscription } from 'rxjs';
+import { RecipeDataService } from '../recipe-data.service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -12,13 +13,16 @@ export class RecipesListComponent implements OnInit,OnDestroy {
   recipes: Recipe[] = []; // Declare as an array of Recipe
   recipeSub : Subscription
 
-  constructor(private recipeService: RecipesService) { }
+  constructor(private recipeService: RecipesService,
+    private recipeDataService : RecipeDataService) { }
 
   ngOnInit() {
+    this.recipeDataService.fetchData();
     this.recipes = this.recipeService.getRecipes();
-    this.recipeSub =    this.recipeService.recipeAdded.subscribe((recipes: Recipe[]) => {
+    this.recipeSub = this.recipeService.recipeAdded.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
     } );
+
   }
   ngOnDestroy() {
     this.recipeSub.unsubscribe();

@@ -11,7 +11,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class RecipesDetailComponent implements OnInit {
   id: number = 0;
-  recipe: Recipe = new Recipe();
+  recipe: Recipe ;
 
   constructor(private shlService: ShoppingListService,
      private recipeService: RecipesService,

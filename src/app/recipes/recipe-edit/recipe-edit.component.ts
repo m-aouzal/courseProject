@@ -17,7 +17,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
 
   id: number;
   editMode: boolean = false;
-  recipe: Recipe = new Recipe();
+  recipe: Recipe;
   sub: Subscription = new Subscription();
   RecipeEditForm: FormGroup = new FormGroup({});
   ingredient: Ingredient[] = [];
