@@ -45,6 +45,7 @@ const routes: Routes = [
     component: RecipeComponent,
     canActivate: [AuthGuard],
     canActivateChild: [authCanActivateChildrenGuard],
+    resolve: [RecipesResolverService ],
     // Apply the AuthGuard to this route
     children: [
       { path: '', component: RecipeStartComponent },
@@ -52,9 +53,11 @@ const routes: Routes = [
       canDeactivate: [authDeActivateGuard],
       // resolve: [RecipesResolverService ],
       component: RecipeEditComponent },
-      { path: ':id', component: RecipesDetailComponent },
+      { path: ':id', 
+      resolve: [RecipesResolverService ],
+      component: RecipesDetailComponent },
       { path: ':id/edit', 
-      // resolve: [RecipesResolverService ],
+      resolve: [RecipesResolverService ],
       canDeactivate: [authDeActivateGuard],
       component: RecipeEditComponent }
     ]
