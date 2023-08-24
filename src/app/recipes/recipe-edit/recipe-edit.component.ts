@@ -75,7 +75,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
   cancelEdit() {
     this.editMode = false;
     this.RecipeEditForm.reset();
-    this.router.navigate(['/recipes', this.id]);
+    // Navigate back using a relative path
+    this.router.navigate(['..'], { relativeTo: this.activatedRoute});
   }
 
   onSubmit() {
