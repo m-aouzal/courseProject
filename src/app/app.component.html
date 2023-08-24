@@ -1,5 +1,5 @@
 <app-header *ngIf="!pageNotFound"></app-header>
-<div [ngClass]="{'container': !pageNotFound, 'container-all': pageNotFound}">
+<div [ngClass]="{'container': !pageNotFound, 'container-all': pageNotFound}" [ngClass]=" {'container-all' : loginPage} ">
   <div class="row">
     <div class="col-md-12">
       <router-outlet></router-outlet>

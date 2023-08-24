@@ -1,0 +1,52 @@
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+            <form>
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="txt" placeholder="User name" required="">
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="password" name="pswd" placeholder="Password" required="">
+                <button>Sign up</button>
+            </form>
+        </div>
+
+        <div class="login">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" formControlName="email" placeholder="Email">
+                <div class="error-message"
+                    *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+                    Email is required.
+                </div>
+                <div class="error-message"
+                    *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched">
+                    Invalid email format.
+                </div>
+                <input type="password" formControlName="password" placeholder="Password">
+                <div class="error-message"
+                    *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+                    Password is required.
+                </div>
+                <div *ngIf="!loading">
+                    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+                </div>
+                
+            </form>
+
+            <div class="col-3 text-center" *ngIf="loading">
+                <div class="snippet" data-title="dot-rolling">
+                    <div class="stage">
+                        <div class="dot-rolling"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="authFailed">
+                Authentication failed
+            </div>
+
+        </div>
+    </div>
+</body>

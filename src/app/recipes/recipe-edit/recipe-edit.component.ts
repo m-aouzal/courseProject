@@ -6,13 +6,14 @@ import { RecipesService } from '../recipes.service';
 import { Subscription } from 'rxjs';
 import { Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ComponentsForm } from 'src/app/ComponentsForm';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
-export class RecipeEditComponent implements OnInit, OnDestroy {
+export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
 
   id: number;
   editMode: boolean = false;
@@ -45,6 +46,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
 
+  verifyChangesAndConfirm(): boolean {
+    return !this.RecipeEditForm.dirty || window.confirm('You have unsaved changes. Do you really want to leave?');
+  }
+
+
+
   populateForm(recipe: Recipe) {
     if (recipe.ingredients) {
       for (let ingredient of recipe.ingredients) {
@@ -75,7 +82,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     const formValue = this.RecipeEditForm.value;
 
     const updatedIngredients = [];
-   
+
     const updatedRecipe: Recipe = {
       name: formValue.name,
       description: formValue.description,

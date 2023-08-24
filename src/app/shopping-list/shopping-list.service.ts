@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,17 @@ export class ShoppingListService {
   ingredients: Ingredient[] = [new Ingredient("Apples", 5), new Ingredient("Tomatoes", 10)];
   ingredientAdded : Subject<Ingredient[]> = new Subject<Ingredient[]>();
   ingredientEdited : Subject<number> = new Subject<number>();
+  private formDirtySubject = new BehaviorSubject<boolean>(false);
+
+  get formDirty$() {
+
+    return this.formDirtySubject.asObservable();
+  }
+
+  setFormDirty(dirty: boolean) {
+    this.formDirtySubject.next(dirty);
+
+  }
 
   getIngredients(){
     return this.ingredients.slice();
@@ -39,5 +51,5 @@ export class ShoppingListService {
     this.ingredientAdded.next(this.ingredients.slice());
   }
 
-
+ 
 }

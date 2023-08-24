@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@ang
 import { Subscriber, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
@@ -20,6 +21,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
   ingredientForm: FormGroup;
   ingredientSub: Subscription;
+  formSubscription: Subscription;
   ingredientIndex: number;
   ingredientName: string;
   ingredientAmount: number;
@@ -30,6 +32,15 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       name: ['', Validators.required],
       amount: ['', Validators.required]
     });
+
+    this.formSubscription = this.ingredientForm.valueChanges.subscribe(() => {
+      this.formSubscription = this.ingredientForm.valueChanges.subscribe(() => {
+        const areInputsCleared = this.areFormControlsCleared();
+        this.shoppingListService.setFormDirty(!areInputsCleared);
+      });
+    });
+      // Function to check if all form controls are cleared
+      
 
 
     this.ingredientSub = this.shoppingListService.ingredientEdited.subscribe((index: number) => {
@@ -44,8 +55,13 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     });
 
   }
+  private areFormControlsCleared(): boolean {
+    const formValues = this.ingredientForm.value;
+    return Object.values(formValues).every(value => value === null || value === '');
+  }
   ngOnDestroy() {
     this.ingredientSub.unsubscribe();
+    this.formSubscription.unsubscribe();
   }
   addIngredient() {
 
@@ -69,6 +85,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.ingredientForm.reset();
   }
 
+  verifyChangesAndConfirm(): boolean {
+    return !this.ingredientForm.dirty || window.confirm('You have unsaved changes. Do you really want to leave?');
+  }
 
 
 
