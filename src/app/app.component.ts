@@ -24,18 +24,18 @@ export class AppComponent {
         this.loginPage = event.urlAfterRedirects.includes('login');
 
       });
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationStart))
-      .subscribe((event: NavigationStart) => {
-        if (event.url.includes('login') && !this.userService.isAuthenticated()) {
-          this.loginPage = true;
-        }
-        else if (event.url.includes('login') && this.userService.isAuthenticated()) {
-          this.loginPage = false;
-          this.router2.navigate(['/recipes']);
-        }
-      }
-      )
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationStart))
+    //   .subscribe((event: NavigationStart) => {
+    //     if (event.url.includes('login') && !this.userService.isAuthenticated()) {
+    //       this.loginPage = true;
+    //     }
+    //     else if (event.url.includes('login') && this.userService.isAuthenticated()) {
+    //       this.loginPage = false;
+    //       this.router2.navigate(['/recipes']);
+    //     }
+    //   }
+      // )
   }
 
 
