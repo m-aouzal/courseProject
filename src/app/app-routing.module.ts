@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { RecipeComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { LoginComponent } from './login/login.component';
-
 
 // Import your components that you want to route to
 import { blockLoginGuard } from './guards/block-login.guard';
@@ -21,53 +19,60 @@ import { authCanActivateChildrenGuard } from './guards/auth-can-activate-childre
 
 import { RecipesResolverService } from './recipes/RecipesResolver.service';
 
-
-
 const routes: Routes = [
-  { path: 'login',
-  canActivate: [blockLoginGuard],
-   component: LoginComponent },
+  {
+    path: 'login',
+    // canActivate: [blockLoginGuard],
+    component: LoginComponent,
+  },
   { path: '404', component: PageNotFoundComponent },
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {
     path: 'shoppingList',
-    canDeactivate: [authDeActivateGuard],
+    // canDeactivate: [authDeActivateGuard],
     component: ShoppingListComponent,
-    canActivate: [AuthGuard], // Apply the AuthGuard to this route
+    // canActivate: [AuthGuard], // Apply the AuthGuard to this route
     children: [
-      { path: 'shoppingEdit',
-      
-       component: ShoppingEditComponent }
-    ]
+      {
+        path: 'shoppingEdit',
+
+        component: ShoppingEditComponent,
+      },
+    ],
   },
   {
     path: 'recipes',
     component: RecipeComponent,
-    canActivate: [AuthGuard],
-    canActivateChild: [authCanActivateChildrenGuard],
-    resolve: {isResolved :RecipesResolverService },
+    // canActivate: [AuthGuard],
+    // canActivateChild: [authCanActivateChildrenGuard],
+    resolve: { isResolved: RecipesResolverService },
     // Apply the AuthGuard to this route
     children: [
       { path: '', component: RecipeStartComponent },
-      { path: 'new', 
-      canDeactivate: [authDeActivateGuard],
-      // resolve: [RecipesResolverService ],
-      component: RecipeEditComponent },
-      { path: ':id', 
-      resolve: [RecipesResolverService ],
-      component: RecipesDetailComponent },
-      { path: ':id/edit', 
-      resolve: [RecipesResolverService ],
-      canDeactivate: [authDeActivateGuard],
-      component: RecipeEditComponent }
-    ]
+      {
+        path: 'new',
+        canDeactivate: [authDeActivateGuard],
+        // resolve: [RecipesResolverService ],
+        component: RecipeEditComponent,
+      },
+      {
+        path: ':id',
+        resolve: [RecipesResolverService],
+        component: RecipesDetailComponent,
+      },
+      {
+        path: ':id/edit',
+        resolve: [RecipesResolverService],
+        canDeactivate: [authDeActivateGuard],
+        component: RecipeEditComponent,
+      },
+    ],
   },
-  { path: '**', redirectTo: '404' }
+  { path: '**', redirectTo: '404' },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
