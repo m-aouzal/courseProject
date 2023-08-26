@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import F
 import { UsersloginService } from './users.login.service';
 import { Router } from '@angular/router';
 import { ComponentsForm } from '../ComponentsForm';
+import { Observable } from 'rxjs';
+import { AuthResponseData } from './users.login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +15,11 @@ export class LoginComponent implements OnInit, ComponentsForm {
   loginForm: FormGroup; // Declare the form group
   signUpForm: FormGroup;
   authFailed: boolean = false;
+  loading: boolean = false;
   loadingSignUp: boolean = false;
-  loadingLogin : boolean = false;
+  loadingLogin: boolean = false;
+  errorSignUp: string = null;
+  errorLogin: string = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +35,7 @@ export class LoginComponent implements OnInit, ComponentsForm {
 
     this.signUpForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required,Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -42,23 +47,69 @@ export class LoginComponent implements OnInit, ComponentsForm {
     );
   }
 
-  onSubmitSignUp() {
-    if (!this.signUpForm.valid) return;
-    this.loadingSignUp = true;
-    const formData = this.signUpForm.value;
-    this.usersService.signUp(formData.email, formData.password).subscribe({
-      next: (response) => {
-        console.log(response);
-      },error: (err) => { console.log(err) },
-    });
-    setTimeout(() => {
-    this.loadingSignUp = false;}
-    ,3000);
-    // this.signUpForm.reset();
-    // this.onSubmitLogin();
+  onSubmitLogin() {
+    this.loadingLogin = true;
+    this.submitForm('login');
   }
-  onSubmitLogin() {}
+
+  onSubmitSignUp() {
+    this.loadingSignUp = true;
+    this.submitForm('signUp');
+  }
+
+  private submitForm(mode: string) {
+    this.loading = true;
+    const formGroup = mode === 'signUp' ? this.signUpForm : this.loginForm;
+
+    if (formGroup.invalid) {
+      this.loading = false;
+      return;
+    }
+
+    const formData = formGroup.value;
+    const authObservable =
+      mode === 'signUp'
+        ? this.usersService.signUp(formData.email, formData.password)
+        : this.usersService.login(formData.email, formData.password);
+
+    authObservable.subscribe({
+      next: (response) => {
+        this.loadingLogin = false;
+        this.loadingSignUp = false;
+        if (mode !== 'signUp') this.router.navigate(['/recipes']);
+        console.log(response);
+      },
+      error: (err) => {
+        if (mode === 'signUp') this.errorSignUp = err;
+        else this.errorLogin = err;
+        this.loadingLogin = false;
+        this.loadingSignUp = false;
+        console.log(err);
+      },
+    });
+    formGroup.reset();
+  }
 }
+
+//     this.loadingLogin = true;
+//     const formData = form.value;
+//     this.usersService.login(formData.email, formData.password).subscribe({
+//       next: (response) => {
+//         setTimeout(() => {
+//           this.loading = false;
+//         }, 2000);
+//         console.log(response);
+//       },
+//       error: (err) => {
+//         setTimeout(() => {
+//           this.loading = false;
+//           this.error = err;
+//         }, 2000);
+//         console.log(err);
+//       },
+//     });
+//   }
+// }
 
 //   ngOnInit() {
 //     if (this.usersService.isAuthenticated()) {

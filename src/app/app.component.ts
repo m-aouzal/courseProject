@@ -1,28 +1,37 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { UsersloginService } from './login/users.login.service';
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
   pageNotFound: boolean = false;
   loginPage: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UsersloginService, private router2: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UsersloginService,
+    private router2: Router,
+    private userLoginService : UsersloginService
+  ) {}
 
   ngOnInit() {
+    this.userLoginService.autoLogin();
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.pageNotFound = event.urlAfterRedirects.includes('404');
         this.loginPage = event.urlAfterRedirects.includes('login');
-
       });
     // this.router.events.pipe(
     //   filter(event => event instanceof NavigationStart))
@@ -35,8 +44,6 @@ export class AppComponent {
     //       this.router2.navigate(['/recipes']);
     //     }
     //   }
-      // )
+    // )
   }
-
-
 }

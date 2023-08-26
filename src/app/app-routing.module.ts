@@ -43,9 +43,9 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: RecipeComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     // canActivateChild: [authCanActivateChildrenGuard],
-    resolve: { isResolved: RecipesResolverService },
+     resolve: { isResolved: RecipesResolverService },
     // Apply the AuthGuard to this route
     children: [
       { path: '', component: RecipeStartComponent },

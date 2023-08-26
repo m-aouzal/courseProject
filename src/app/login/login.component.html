@@ -2,9 +2,9 @@
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true" />
   
-      <div class="signup">
+      <div class="signup"  >
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmitSignUp()">
-          <label for="chk" aria-hidden="true">Sign up</label>
+          <label  for="chk" aria-hidden="true">Sign up</label>
           <!-- <input type="text" name="txt" placeholder="User name" required=""> -->
           <input type="email" formControlName="email" placeholder="Email" />
           <div
@@ -51,15 +51,20 @@
               </div>
             </div>
           </div>
+          <div *ngIf="errorSignUp" class="col-xs-8 col-xs-offset-2 p-3 m-3">
+            <div class="alert alert-danger text-center">
+              {{errorSignUp}}
+            </div>
+          </div>
           <div *ngIf="!loadingSignUp">
-            <button type="submit" [disabled]="signUpForm.invalid">Sign up</button>
+            <button class = "btn" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
           </div>
         </form>
       </div>
   
-      <div class="login">
+      <div class="login" >
         <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
-          <label for="chk" aria-hidden="true">Login</label>
+          <label  for="chk" aria-hidden="true">Login</label>
           <input type="email" formControlName="email" placeholder="Email" />
           <div
             class="error-message"
@@ -93,18 +98,25 @@
           >
             Password is required.
           </div>
+          <div class="col-3 text-center" *ngIf="loadingLogin">
+            <div class="snippet" data-title="dot-rolling">
+              <div class="stage">
+                <div class="dot-rolling"></div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="errorLogin" class="col-xs-8 col-xs-offset-2 p-3 m-3">
+            <div class="alert alert-danger text-center">
+              {{errorLogin}}
+            </div>
+          </div>
           <div *ngIf="!loadingLogin">
             <button type="submit" [disabled]="loginForm.invalid">Login</button>
           </div>
         </form>
   
-        <div class="col-3 text-center" *ngIf="loadingLogin">
-          <div class="snippet" data-title="dot-rolling">
-            <div class="stage">
-              <div class="dot-rolling"></div>
-            </div>
-          </div>
-        </div>
+       
+
   
         <div class="alert alert-danger" *ngIf="authFailed">
           Authentication failed

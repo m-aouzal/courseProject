@@ -72,9 +72,9 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+/* button:hover {
     background: #6d44b8;
-}
+} */
 
 .login {
     height: 460px;
