@@ -2,6 +2,8 @@ import { Injectable} from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Subject } from 'rxjs';
 import { RecipeDataService } from './recipe-data.service';
+import { AdItem } from '../ads/AdItem';
+import { AdRecipeImageNameComponent } from '../ads/ad-banner/ad-Recipe-Image-Name/ad-Recipe-Image-Name.component';
 
 
 
@@ -15,9 +17,18 @@ export class RecipesService {
   constructor() { }
 
   recipeAdded : Subject<Recipe[]> = new Subject<Recipe[]>();
+  recipeAdsItems :AdItem[] = [];
 
   
   private recipes: Recipe[] = [];
+
+  getRecipesAds(recipes : Recipe[]) {
+    console.log("get recipes ads")
+    for(let recipe of recipes){
+      this.recipeAdsItems.push(new AdItem(AdRecipeImageNameComponent,recipe));
+    }
+    return this.recipeAdsItems;
+  }
 
   getRecipes(){
     return this.recipes.slice();

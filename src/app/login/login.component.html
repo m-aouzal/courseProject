@@ -1,7 +1,15 @@
 <body>
-    <div class="main">
+  <!-- <div class="alert alert-danger" *ngIf="error">
+      <p>{{ error }}</p>
+    </div> -->
+    <app-alert
+      [message]="error"
+      *ngIf="error"
+      (close)="onHandleError()"
+    ></app-alert>
+
+    <div class="main"> 
       <input type="checkbox" id="chk" aria-hidden="true" />
-  
       <div class="signup"  >
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmitSignUp()">
           <label  for="chk" aria-hidden="true">Sign up</label>
@@ -51,11 +59,11 @@
               </div>
             </div>
           </div>
-          <div *ngIf="errorSignUp" class="col-xs-8 col-xs-offset-2 p-3 m-3">
+          <!-- <div *ngIf="errorSignUp" class="col-xs-8 col-xs-offset-2 p-3 m-3">
             <div class="alert alert-danger text-center">
               {{errorSignUp}}
             </div>
-          </div>
+          </div> -->
           <div *ngIf="!loadingSignUp">
             <button class = "btn" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
           </div>
@@ -105,11 +113,11 @@
               </div>
             </div>
           </div>
-          <div *ngIf="errorLogin" class="col-xs-8 col-xs-offset-2 p-3 m-3">
+          <!-- <div *ngIf="errorLogin" class="col-xs-8 col-xs-offset-2 p-3 m-3">
             <div class="alert alert-danger text-center">
               {{errorLogin}}
             </div>
-          </div>
+          </div> -->
           <div *ngIf="!loadingLogin">
             <button type="submit" [disabled]="loginForm.invalid">Login</button>
           </div>

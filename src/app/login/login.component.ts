@@ -1,25 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import FormBuilder and other necessary modules
 import { UsersloginService } from './users.login.service';
 import { Router } from '@angular/router';
 import { ComponentsForm } from '../ComponentsForm';
-import { Observable } from 'rxjs';
-import { AuthResponseData } from './users.login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html', // Update with the correct template URL
   styleUrls: ['./login.component.css'], // Update with the correct style URL
 })
-export class LoginComponent implements OnInit, ComponentsForm {
+export class LoginComponent implements ComponentsForm {
   loginForm: FormGroup; // Declare the form group
   signUpForm: FormGroup;
   authFailed: boolean = false;
   loading: boolean = false;
   loadingSignUp: boolean = false;
   loadingLogin: boolean = false;
-  errorSignUp: string = null;
-  errorLogin: string = null;
+  error: string = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,6 +54,10 @@ export class LoginComponent implements OnInit, ComponentsForm {
     this.submitForm('signUp');
   }
 
+  onHandleError() {
+    this.error = null;
+  }
+
   private submitForm(mode: string) {
     this.loading = true;
     const formGroup = mode === 'signUp' ? this.signUpForm : this.loginForm;
@@ -80,8 +81,7 @@ export class LoginComponent implements OnInit, ComponentsForm {
         console.log(response);
       },
       error: (err) => {
-        if (mode === 'signUp') this.errorSignUp = err;
-        else this.errorLogin = err;
+        this.error = err;
         this.loadingLogin = false;
         this.loadingSignUp = false;
         console.log(err);
