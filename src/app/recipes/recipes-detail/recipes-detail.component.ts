@@ -11,7 +11,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class RecipesDetailComponent implements OnInit {
   id: number = 0;
-  recipe: Recipe ;
+  recipe: Recipe = new Recipe('', '', '', []);
 
   constructor(private shlService: ShoppingListService,
      private recipeService: RecipesService,
@@ -20,8 +20,15 @@ export class RecipesDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
+      
       this.id = +params['id']; // Convert id to a number using + operator
-      this.recipe = this.recipeService.getRecipeById(this.id);
+      if (!isNaN(this.id) && this.recipeService.getRecipeById(this.id)){
+        this.recipe = this.recipeService.getRecipeById(this.id);
+      }
+      else {
+        this.router.navigate(['/page-not-found']);
+      }
+    
     });
   }
 

@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ComponentsForm } from 'src/app/ComponentsForm';
+import { RecipeDataService } from '../recipe-data.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -25,7 +26,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
   constructor(private activatedRoute: ActivatedRoute,
     private recipeService: RecipesService,
     private fb: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private RecipeDataService: RecipeDataService) {
     this.RecipeEditForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -36,14 +38,23 @@ export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.id = +params['id'];
-      this.editMode = params['id'] !== undefined; // Change the condition here
-      if (this.editMode) {
+      const id = +params['id']; // Convert the id parameter to a number
+  
+      if (!isNaN(id) && this.recipeService.getRecipeById(id)) {
+        // Check if id is a valid number and recipe exists
+        this.id = id;
+        this.editMode = true;
+  
+        // Retrieve the recipe and populate the form
         this.recipe = this.recipeService.getRecipeById(this.id);
         this.populateForm(this.recipe);
+      } else {
+        // If id is not valid or recipe doesn't exist, navigate to the not-found page
+        this.router.navigate(['/page-not-found']);
       }
     });
   }
+  
 
 
   verifyChangesAndConfirm(): boolean {
