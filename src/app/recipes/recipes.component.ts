@@ -8,7 +8,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipeComponent {
+export class RecipesComponent {
 
   
  

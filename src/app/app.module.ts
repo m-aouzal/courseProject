@@ -5,15 +5,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {TooltipModule} from "ngx-bootstrap/tooltip"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { RecipesModule } from './recipes/recipes.module';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipeComponent } from './recipes/recipes.component';
-import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
-import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.component';
-import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-item.component';
+
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropDownDirectiveDirective } from './shared/drop-down.directive.directive';
@@ -33,10 +31,7 @@ import { AdBannerComponent } from './ads/ad-banner/ad-banner.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    RecipeComponent,
-    RecipesListComponent,
-    RecipesDetailComponent,
-    RecipeItemComponent,
+    
     ShoppingListComponent,
     ShoppingEditComponent,
     DropDownDirectiveDirective,
@@ -45,9 +40,7 @@ import { AdBannerComponent } from './ads/ad-banner/ad-banner.component';
     RecipeEditComponent,
     LoginComponent,
     AlertComponent,
-    AdDirective,
-    AdBannerComponent,
-    AdRecipeImageNameComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -55,6 +48,7 @@ import { AdBannerComponent } from './ads/ad-banner/ad-banner.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RecipesModule,
     TooltipModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()
