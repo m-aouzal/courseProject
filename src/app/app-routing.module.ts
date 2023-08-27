@@ -17,9 +17,14 @@ const routes: Routes = [
     component: LoginComponent,
   },
   { path: '404', component: PageNotFoundComponent },
+  {path: '', redirectTo: '/recipes', pathMatch: 'full'},
+  {
+    path: 'shoppingList',
+    loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
+  }
  
 
-  { path: '**', redirectTo: '404' } 
+  // { path: '**', redirectTo: '404' } 
  
 ];
 

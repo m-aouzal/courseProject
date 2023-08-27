@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AdBannerComponent } from '../ads/ad-banner/ad-banner.component';
@@ -21,7 +20,6 @@ import { AlertComponent } from './alert/alert.component';
     CommonModule,
     RouterModule,
     TooltipModule.forRoot(),
-    BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
   ],
   exports: [

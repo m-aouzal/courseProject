@@ -5,7 +5,7 @@ import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 
 const routes: Routes = [
   {
-    path: 'shoppingList',
+    path: '',
     // canDeactivate: [authDeActivateGuard],
     component: ShoppingListComponent,
     // canActivate: [AuthGuard], // Apply the AuthGuard to this route

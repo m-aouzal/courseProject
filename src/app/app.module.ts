@@ -34,7 +34,7 @@ import { LoginModule } from './login/login.module';
     BsDropdownModule.forRoot(),
     LoginModule,
     SharedModule,
-    ShoppingListModule,
+    // ShoppingListModule,
     RecipesModule,
     AppRoutingModule,
     HttpClientModule
