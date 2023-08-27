@@ -26,7 +26,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   { path: '404', component: PageNotFoundComponent },
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+ 
   {
     path: 'shoppingList',
     // canDeactivate: [authDeActivateGuard],
@@ -40,35 +40,7 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'recipes',
-    component: RecipesComponent,
-    canActivate: [AuthGuard],
-    // canActivateChild: [authCanActivateChildrenGuard],
-     resolve: { isResolved: RecipesResolverService },
-    // Apply the AuthGuard to this route
-    children: [
-      { path: '', component: RecipeStartComponent },
-      {
-        path: 'new',
-        canDeactivate: [authDeActivateGuard],
-        // resolve: [RecipesResolverService ],
-        component: RecipeEditComponent,
-      },
-      {
-        path: ':id',
-        resolve: [RecipesResolverService],
-        component: RecipesDetailComponent,
-      },
-      {
-        path: ':id/edit',
-        resolve: [RecipesResolverService],
-        canDeactivate: [authDeActivateGuard],
-        component: RecipeEditComponent,
-      },
-    ],
-  },
-  { path: '**', redirectTo: '404' },
+ 
 ];
 
 @NgModule({

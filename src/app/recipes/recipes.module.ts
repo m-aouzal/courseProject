@@ -4,7 +4,6 @@ import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { RecipesDetailComponent } from './recipes-detail/recipes-detail.component';
 import { RecipeItemComponent } from './recipes-list/recipe-item/recipe-item.component';
 import { AdBannerComponent } from '../ads/ad-banner/ad-banner.component';
-import { AdComponent } from '../ads/AdComponent';
 import { AdDirective } from '../ads/Ads.directive';
 import { AdRecipeImageNameComponent } from '../ads/ad-banner/ad-Recipe-Image-Name/ad-Recipe-Image-Name.component';
 
@@ -14,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { RecipesRoutingModule } from './recipes-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +28,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
   imports: [CommonModule, 
     ReactiveFormsModule,
      RouterModule,
+     RecipesRoutingModule,
      TooltipModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()],
-  exports: [
+    exports: [
     RecipesComponent,
     RecipesListComponent,
     RecipesDetailComponent,
