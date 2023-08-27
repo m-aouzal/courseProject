@@ -1,14 +1,34 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AdBannerComponent } from '../ads/ad-banner/ad-banner.component';
 import { AdDirective } from '../ads/Ads.directive';
 import { AdRecipeImageNameComponent } from '../ads/ad-banner/ad-Recipe-Image-Name/ad-Recipe-Image-Name.component';
 import { RouterModule } from '@angular/router';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
-  declarations: [AdDirective, AdBannerComponent, AdRecipeImageNameComponent],
-  imports: [CommonModule, RouterModule],
-  exports: [AdDirective, AdBannerComponent, AdRecipeImageNameComponent],
+  declarations: [
+    AdDirective,
+    AdBannerComponent,
+    AdRecipeImageNameComponent,
+    AlertComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    TooltipModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
+  ],
+  exports: [
+    AdDirective,
+    AdBannerComponent,
+    AdRecipeImageNameComponent,
+    AlertComponent,
+  ],
 })
 export class SharedModule {}

@@ -17,7 +17,6 @@ export class RecipesService {
   private recipes: Recipe[] = [];
 
   getRecipesAds(recipes: Recipe[]) {
-    console.log('get recipes ads');
     for (let recipe of recipes) {
       this.recipeAdsItems.push(new AdItem(AdRecipeImageNameComponent, recipe));
     }

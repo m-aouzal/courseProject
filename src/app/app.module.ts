@@ -15,12 +15,11 @@ import { HeaderComponent } from './header/header.component';
 
 import { DropDownDirectiveDirective } from './shared/drop-down.directive.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LoginComponent } from './login/login.component';
-import { AlertComponent } from './shared/alert/alert.component';
 
 
 
 import { AuthInterceptorService } from './login/auth-interceptor.service';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -28,20 +27,19 @@ import { AuthInterceptorService } from './login/auth-interceptor.service';
     HeaderComponent,
     DropDownDirectiveDirective,
     PageNotFoundComponent,
-    LoginComponent,
-    AlertComponent,
-  
   ],
   imports: [
     BrowserModule,
+    TooltipModule.forRoot(),
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
+    LoginModule,
     SharedModule,
     ShoppingListModule,
     RecipesModule,
     AppRoutingModule,
-    HttpClientModule,
-    TooltipModule.forRoot(),
-    BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    HttpClientModule
+    
   ],
   providers: [AppRoutingModule,{provide : HTTP_INTERCEPTORS,useClass :AuthInterceptorService,multi : true  }],
   bootstrap: [AppComponent]
