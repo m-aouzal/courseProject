@@ -38,8 +38,6 @@ import { AuthInterceptorService } from './login/auth-interceptor.service';
     ShoppingListModule,
     RecipesModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     TooltipModule.forRoot(),
     BrowserAnimationsModule,
