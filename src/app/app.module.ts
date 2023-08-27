@@ -30,8 +30,6 @@ import { AuthInterceptorService } from './login/auth-interceptor.service';
     HeaderComponent,
     DropDownDirectiveDirective,
     PageNotFoundComponent,
-    RecipeStartComponent,
-    RecipeEditComponent,
     LoginComponent,
     AlertComponent,
   
@@ -44,7 +42,6 @@ import { AuthInterceptorService } from './login/auth-interceptor.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-   
     TooltipModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()

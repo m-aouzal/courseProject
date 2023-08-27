@@ -14,6 +14,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RecipesRoutingModule } from './recipes-routing.module';
+import { RecipeStartComponent } from './recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     RecipesListComponent,
     RecipesDetailComponent,
     RecipeItemComponent,
+    RecipeStartComponent,
+    RecipeEditComponent,
     AdDirective,
     AdBannerComponent,
     AdRecipeImageNameComponent,
