@@ -3,9 +3,6 @@ import { RecipesComponent } from './recipes.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { RecipesDetailComponent } from './recipes-detail/recipes-detail.component';
 import { RecipeItemComponent } from './recipes-list/recipe-item/recipe-item.component';
-import { AdBannerComponent } from '../ads/ad-banner/ad-banner.component';
-import { AdDirective } from '../ads/Ads.directive';
-import { AdRecipeImageNameComponent } from '../ads/ad-banner/ad-Recipe-Image-Name/ad-Recipe-Image-Name.component';
 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +13,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -26,9 +24,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
     RecipeItemComponent,
     RecipeStartComponent,
     RecipeEditComponent,
-    AdDirective,
-    AdBannerComponent,
-    AdRecipeImageNameComponent,
+    
   ],
   imports: [CommonModule, 
     ReactiveFormsModule,
@@ -36,7 +32,8 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
      RecipesRoutingModule,
      TooltipModule.forRoot(),
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()],
+    BsDropdownModule.forRoot(),
+SharedModule],
     exports: [
    
   ],

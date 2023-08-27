@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
-
+import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,8 +15,6 @@ import { HeaderComponent } from './header/header.component';
 
 import { DropDownDirectiveDirective } from './shared/drop-down.directive.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { LoginComponent } from './login/login.component';
 import { AlertComponent } from './shared/alert/alert.component';
 
@@ -36,6 +34,7 @@ import { AuthInterceptorService } from './login/auth-interceptor.service';
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     ShoppingListModule,
     RecipesModule,
     AppRoutingModule,
