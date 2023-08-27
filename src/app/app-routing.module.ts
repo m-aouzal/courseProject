@@ -11,12 +11,13 @@ import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
+ 
   {
     path: 'login',
-    canActivate: [blockLoginGuard],
-    component: LoginComponent,
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
-  { path: '404', component: PageNotFoundComponent },
+
+  
   {path: '', redirectTo: '/recipes', pathMatch: 'full'},
   {
     path: 'shoppingList',
@@ -26,7 +27,7 @@ const routes: Routes = [
     path: 'recipes',
     loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule)
   },
- 
+  { path: '404', component: PageNotFoundComponent },
 
   { path: '**', redirectTo: '404' } 
  
