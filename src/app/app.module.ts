@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {TooltipModule} from "ngx-bootstrap/tooltip"
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RecipesModule } from './recipes/recipes.module';
@@ -14,8 +14,6 @@ import { HeaderComponent } from './header/header.component';
 
 import { DropDownDirectiveDirective } from './shared/drop-down.directive.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-
 
 import { AuthInterceptorService } from './login/auth-interceptor.service';
 import { LoginModule } from './login/login.module';
@@ -35,12 +33,18 @@ import { LoginModule } from './login/login.module';
     LoginModule,
     SharedModule,
     // ShoppingListModule,
-    RecipesModule,
+    // RecipesModule,
     AppRoutingModule,
-    HttpClientModule
-    
+    HttpClientModule,
   ],
-  providers: [AppRoutingModule,{provide : HTTP_INTERCEPTORS,useClass :AuthInterceptorService,multi : true  }],
-  bootstrap: [AppComponent]
+  providers: [
+    AppRoutingModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

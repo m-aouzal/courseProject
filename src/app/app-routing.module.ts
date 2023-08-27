@@ -21,10 +21,14 @@ const routes: Routes = [
   {
     path: 'shoppingList',
     loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
-  }
+  },
+  {
+    path: 'recipes',
+    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule)
+  },
  
 
-  // { path: '**', redirectTo: '404' } 
+  { path: '**', redirectTo: '404' } 
  
 ];
 

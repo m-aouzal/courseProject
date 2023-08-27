@@ -10,9 +10,8 @@ import { authDeActivateGuard } from '../guards/auth-de-activate.guard';
 // import { authCanActivateChildrenGuard } from '../guards/auth-can-activate-children.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {
-    path: 'recipes',
+    path: '',
     component: RecipesComponent,
     canActivate: [AuthGuard],
     // canActivateChild: [authCanActivateChildrenGuard],
