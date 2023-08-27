@@ -37,9 +37,11 @@ const routes: Routes = [
         canDeactivate: [authDeActivateGuard],
         component: RecipeEditComponent,
       },
+      { path: '**', redirectTo: '404' }
     ],
   },
-  { path: '**', redirectTo: '404' },
+
+
 ];
 
 @NgModule({

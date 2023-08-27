@@ -27,19 +27,8 @@ const routes: Routes = [
   },
   { path: '404', component: PageNotFoundComponent },
  
-  {
-    path: 'shoppingList',
-    // canDeactivate: [authDeActivateGuard],
-    component: ShoppingListComponent,
-    // canActivate: [AuthGuard], // Apply the AuthGuard to this route
-    children: [
-      {
-        path: 'shoppingEdit',
 
-        component: ShoppingEditComponent,
-      },
-    ],
-  },
+  { path: '**', redirectTo: '404' } 
  
 ];
 

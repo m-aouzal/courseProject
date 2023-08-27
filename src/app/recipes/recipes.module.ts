@@ -33,10 +33,7 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()],
     exports: [
-    RecipesComponent,
-    RecipesListComponent,
-    RecipesDetailComponent,
-    RecipeItemComponent,
+   
   ],
 })
 export class RecipesModule {}
