@@ -36,12 +36,20 @@ export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      const id = +params['id']; // Convert the id parameter to a number
-  
-      if (!isNaN(id) && this.recipeService.getRecipeById(id)) {
-        // Check if id is a valid number and recipe exists
+      
+       // Convert the id parameter to a number
+      
+      if (params['id'] === undefined ) {
+       
+        // Case for creating a new recipe
+        this.editMode = false;
+    
+        // Other logic specific to creating a new recipe can be added here
+      } else if (!isNaN(+params['id']) && this.recipeService.getRecipeById(+params['id'])) {
+        const id = +params['id'];
+        // Case for editing an existing recipe
         this.id = id;
         this.editMode = true;
   
@@ -49,11 +57,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy, ComponentsForm {
         this.recipe = this.recipeService.getRecipeById(this.id);
         this.populateForm(this.recipe);
       } else {
+        
         // If id is not valid or recipe doesn't exist, navigate to the not-found page
         this.router.navigate(['/page-not-found']);
       }
     });
   }
+  
   
 
 

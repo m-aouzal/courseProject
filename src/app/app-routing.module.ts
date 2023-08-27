@@ -1,23 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+
 import { LoginComponent } from './login/login.component';
 
 // Import your components that you want to route to
-import { blockLoginGuard } from './guards/block-login.guard';
-import { AuthGuard } from './guards/auth-can-activate.guard';
-import { authDeActivateGuard } from './guards/auth-de-activate.guard';
-import { authCanActivateChildrenGuard } from './guards/auth-can-activate-children.guard';
 
-import { RecipesResolverService } from './recipes/RecipesResolver.service';
 
 const routes: Routes = [
   {
