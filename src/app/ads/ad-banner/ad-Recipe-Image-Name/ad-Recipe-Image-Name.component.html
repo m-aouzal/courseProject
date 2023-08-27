@@ -1,8 +1,22 @@
-<div class="card">
-  <img class="card-img-top" src="{{ data.imagePath }}" alt="{{data.name}}" />
-  <div class="card-body">
-    <h5 class="card-title">{{ data.name}}</h5>
-    <p class="card-text">{{ data.description }}</p>
-    <a (click) ="visiteRecipe()" class="btn btn-primary">Go To Recipe</a>
+<a
+  (click)=" visiteRecipe()"
+  [routerLinkActive]="'active'"
+  style="cursor: pointer"
+  class="list-group-item clearfix"
+>
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h5 class="list-group-item-heading">{{ data.name }}</h5>
+      <p class="list-group-item-text">{{ data.description }}</p>
+    </div>
+    <div>
+      <img
+        [src]="data.imagePath"
+        [alt]="data.name"
+        class="img-fluid"
+        style="height: 50px; width: 80px"
+      />
+    </div>
   </div>
-</div>
+</a>
+
