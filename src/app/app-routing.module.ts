@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {
     path: 'shoppingList',
-    loadChildren: () =>
-      import('./shopping-list/shopping-list.module').then(
-        (m) => m.ShoppingListModule
+    loadComponent: () =>
+      import('./shopping-list/shopping-list.component').then(
+        (m) => m.ShoppingListComponent
       ),
   },
   {
