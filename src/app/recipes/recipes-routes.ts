@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 import { RecipesComponent } from './recipes.component';
 import { RecipesDetailComponent } from './recipes-detail/recipes-detail.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
@@ -8,7 +8,7 @@ import { AuthGuard } from '../guards/auth-can-activate.guard';
 import { authDeActivateGuard } from '../guards/auth-de-activate.guard';
 // import { authCanActivateChildrenGuard } from '../guards/auth-can-activate-children.guard';
 
-export const RECIPES_ROUTES: Routes = [
+export default  [
   {
     path: '',
     component: RecipesComponent,
@@ -38,4 +38,4 @@ export const RECIPES_ROUTES: Routes = [
       { path: '**', redirectTo: '404' },
     ],
   },
-];
+] as Route[];
