@@ -10,23 +10,21 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
-  declarations: [
-    AdDirective,
-    AdBannerComponent,
-    AdRecipeImageNameComponent,
-    AlertComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    TooltipModule.forRoot(),
-    BsDropdownModule.forRoot(),
-  ],
-  exports: [
-    AdDirective,
-    AdBannerComponent,
-    AdRecipeImageNameComponent,
-    AlertComponent,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        TooltipModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        AdDirective,
+        AdBannerComponent,
+        AdRecipeImageNameComponent,
+        AlertComponent,
+    ],
+    exports: [
+        AdDirective,
+        AdBannerComponent,
+        AdRecipeImageNameComponent,
+        AlertComponent,
+    ],
 })
 export class SharedModule {}

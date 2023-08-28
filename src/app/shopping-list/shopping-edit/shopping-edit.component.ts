@@ -1,15 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Subscriber, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 
 @Component({
-  selector: 'app-shopping-edit',
-  templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css']
+    selector: 'app-shopping-edit',
+    templateUrl: './shopping-edit.component.html',
+    styleUrls: ['./shopping-edit.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
 

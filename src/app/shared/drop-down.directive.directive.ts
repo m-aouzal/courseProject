@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appdropdown]'
+    selector: '[appdropdown]',
+    standalone: true
 })
 export class DropDownDirectiveDirective {
   @HostBinding('class.show') isOpen = false; // Use 'show' class instead of 'open'

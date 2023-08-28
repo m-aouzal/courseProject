@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { RecipesService } from '../recipes.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @Component({
-  selector: 'app-recipes-detail',
-  templateUrl: './recipes-detail.component.html',
-  styleUrls: ['./recipes-detail.component.css']
+    selector: 'app-recipes-detail',
+    templateUrl: './recipes-detail.component.html',
+    styleUrls: ['./recipes-detail.component.css'],
+    standalone: true,
+    imports: [BsDropdownModule, RouterLink, NgFor]
 })
 export class RecipesDetailComponent implements OnInit {
   id: number = 0;

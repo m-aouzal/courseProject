@@ -3,12 +3,16 @@ import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Subscriber, Subscription } from 'rxjs';
 import { ComponentsForm } from '../ComponentsForm';
+import { NgFor } from '@angular/common';
+import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 
 
 @Component({
-  selector: 'app-shopping-list',
-  templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+    selector: 'app-shopping-list',
+    templateUrl: './shopping-list.component.html',
+    styleUrls: ['./shopping-list.component.css'],
+    standalone: true,
+    imports: [ShoppingEditComponent, NgFor]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy,ComponentsForm,OnDestroy {
 

@@ -16,24 +16,18 @@ import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [
-    RecipesComponent,
-    RecipesListComponent,
-    RecipesDetailComponent,
-    RecipeItemComponent,
-    RecipeStartComponent,
-    RecipeEditComponent,
-    
-  ],
-  imports: [CommonModule, 
-    ReactiveFormsModule,
-     RouterModule,
-     RecipesRoutingModule,
-     TooltipModule.forRoot(),
-    BsDropdownModule.forRoot(),
-SharedModule],
-    exports: [
-   
-  ],
+    imports: [CommonModule,
+        ReactiveFormsModule,
+        RouterModule,
+        RecipesRoutingModule,
+        TooltipModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        SharedModule, RecipesComponent,
+        RecipesListComponent,
+        RecipesDetailComponent,
+        RecipeItemComponent,
+        RecipeStartComponent,
+        RecipeEditComponent],
+    exports: [],
 })
 export class RecipesModule {}

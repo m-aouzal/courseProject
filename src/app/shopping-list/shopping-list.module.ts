@@ -11,15 +11,15 @@ import { ShoppingListComponent } from './shopping-list.component';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 
 @NgModule({
-  declarations: [ShoppingListComponent, ShoppingEditComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    RouterModule,
-    TooltipModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    ShoppingListRoutingModule,
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        RouterModule,
+        TooltipModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        ShoppingListRoutingModule,
+        ShoppingListComponent, ShoppingEditComponent,
+    ],
 })
 export class ShoppingListModule {}

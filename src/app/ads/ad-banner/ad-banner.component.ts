@@ -7,6 +7,8 @@ import { AdDirective } from '../Ads.directive';
   selector: 'app-ad-banner',
   templateUrl: './ad-banner.component.html',
   styleUrls: ['./ad-banner.component.css'],
+  standalone: true,
+  imports: [AdDirective],
 })
 export class AdBannerComponent implements OnInit, OnDestroy {
   @Input() ads: AdItem[] = [];
