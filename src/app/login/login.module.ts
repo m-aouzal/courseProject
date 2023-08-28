@@ -10,9 +10,10 @@ import { blockLoginGuard } from '../guards/block-login.guard';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [],
   imports: [
     ReactiveFormsModule,
+    LoginComponent,
     CommonModule,
     SharedModule,
     TooltipModule.forRoot(),
