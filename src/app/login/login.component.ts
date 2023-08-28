@@ -4,18 +4,17 @@ import { UsersloginService } from './users.login.service';
 import { Router } from '@angular/router';
 import { ComponentsForm } from '../ComponentsForm';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { NgIf } from '@angular/common';
+import { AlertComponent } from '../shared/alert/alert.component';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule,SharedModule,NgIf],
+  imports: [ReactiveFormsModule, NgIf, AlertComponent],
   selector: 'app-login',
   templateUrl: './login.component.html', // Update with the correct template URL
   styleUrls: ['./login.component.css'], // Update with the correct style URL
 })
 export class LoginComponent implements ComponentsForm {
-
   loginForm: FormGroup; // Declare the form group
   signUpForm: FormGroup;
   authFailed: boolean = false;
