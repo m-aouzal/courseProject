@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'recipes',
     loadChildren: () =>
-      import('./recipes/recipes.module').then((m) => m.RecipesModule),
+      import('./recipes/recipes-routes').then((m) => m.RECIPES_ROUTES),
   },
   { path: '404', component: PageNotFoundComponent },
 

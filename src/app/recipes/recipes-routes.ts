@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { RecipesComponent } from './recipes.component';
 import { RecipesDetailComponent } from './recipes-detail/recipes-detail.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
@@ -9,13 +8,13 @@ import { AuthGuard } from '../guards/auth-can-activate.guard';
 import { authDeActivateGuard } from '../guards/auth-de-activate.guard';
 // import { authCanActivateChildrenGuard } from '../guards/auth-can-activate-children.guard';
 
-const routes: Routes = [
+export const RECIPES_ROUTES: Routes = [
   {
     path: '',
     component: RecipesComponent,
     canActivate: [AuthGuard],
     // canActivateChild: [authCanActivateChildrenGuard],
-     resolve: { isResolved: RecipesResolverService },
+    resolve: { isResolved: RecipesResolverService },
     // Apply the AuthGuard to this route
     children: [
       { path: '', component: RecipeStartComponent },
@@ -36,15 +35,7 @@ const routes: Routes = [
         canDeactivate: [authDeActivateGuard],
         component: RecipeEditComponent,
       },
-      { path: '**', redirectTo: '404' }
+      { path: '**', redirectTo: '404' },
     ],
   },
-
-
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class RecipesRoutingModule {}
