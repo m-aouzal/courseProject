@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+
+import {  Routes} from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { blockLoginGuard } from './guards/block-login.guard'
 
 // Import your components that you want to route to
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
@@ -30,12 +30,4 @@ const routes: Routes = [
   { path: '**', redirectTo: '404' },
 ];
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
+
