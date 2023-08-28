@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { blockLoginGuard } from './guards/block-login.guard';
-
-
+import { RouterModule, Routes,PreloadAllModules  } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-import { LoginComponent } from './login/login.component';
-
 // Import your components that you want to route to
-
-
 const routes: Routes = [
  
   {
@@ -34,7 +27,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
