@@ -14,7 +14,7 @@
           <div class="col-md-8 form-group mt-3">
             <button class="btn btn-success" [disabled]="ingredientForm.invalid" type="submit">{{ editMode ? 'Update' : 'Add' }}</button>
             <button *ngIf="editMode" class="btn btn-danger ms-2" type="button" [disabled]="!editMode" (click)="deleteIngredient()">Delete</button>
-            <button class="btn btn-primary ms-2" type="button" (click)="ingredientForm.reset(); editMode = false" [disabled]="ingredientForm.pristine && !editMode">Clear</button>
+            <button class="btn btn-primary ms-2" type="button" (click)="onClear()" [disabled]="ingredientForm.pristine && !editMode">Clear</button>
           </div>
         </div>
       </form>
