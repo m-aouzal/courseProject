@@ -9,6 +9,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { AuthInterceptorService } from './app/login/auth-interceptor.service';
 import { PreloadAllModules, withPreloading } from '@angular/router';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import {
   HTTP_INTERCEPTORS,
   withInterceptorsFromDi,
@@ -20,18 +22,21 @@ import { shoppingListReducer } from './app/shopping-list/store/shopping-list.red
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, TooltipModule.forRoot(), BsDropdownModule.forRoot()),
+    importProvidersFrom(
+      BrowserModule,
+      TooltipModule.forRoot(),
+      BsDropdownModule.forRoot(),
+      StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: false })
+    ),
     {
-        provide: HTTP_INTERCEPTORS,
-        useClass: AuthInterceptorService,
-        multi: true,
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
     },
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideStore(
-      {shoppingList: shoppingListReducer}
-    ),
-    provideEffects()
-],
+    provideStore({ shoppingList: shoppingListReducer }),
+    provideEffects(),
+  ],
 }).catch((err) => console.error(err));
