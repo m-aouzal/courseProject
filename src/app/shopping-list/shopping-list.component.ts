@@ -1,40 +1,48 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
-import { Subscriber, Subscription } from 'rxjs';
+import { Subscriber, Subscription,Observable } from 'rxjs';
 import { ComponentsForm } from '../ComponentsForm';
-import { NgFor } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
-
+import { Store } from '@ngrx/store';
+import { InitialStateType } from './store/shopping-list.reducer';
+import { ingredientsSelector } from './store/shopping-list.selectors';
 
 @Component({
     selector: 'app-shopping-list',
     templateUrl: './shopping-list.component.html',
     styleUrls: ['./shopping-list.component.css'],
     standalone: true,
-    imports: [ShoppingEditComponent, NgFor]
+    imports: [ShoppingEditComponent, NgFor,AsyncPipe]
 })
 export class ShoppingListComponent implements OnInit, OnDestroy,ComponentsForm,OnDestroy {
 
   ingredients: Ingredient[] = [];
+  ingredients$ : Observable< Ingredient[]>;
   sub: Subscription;
   formDirtySubscription: Subscription;
   isFormDirty: boolean = false;
-  constructor(private shoppingListservice: ShoppingListService) { }
+  constructor(private shoppingListservice: ShoppingListService,
+    private store:Store<{shoppingList : InitialStateType}>) { }
 
   ngOnInit(): void {
-    this.ingredients = this.shoppingListservice.getIngredients();
-    this.sub = this.shoppingListservice.ingredientAdded.subscribe((ingredients: Ingredient[]) => {
-      this.ingredients = ingredients;
-    })
+    
+    this.ingredients$ = this.store.select(ingredientsSelector);
+
+    // this.ingredients = this.shoppingListservice.getIngredients();
+    // this.sub = this.shoppingListservice.ingredientAdded.subscribe((ingredients: Ingredient[]) => {
+    //   this.ingredients = ingredients;
+    // })
     this.formDirtySubscription = this.shoppingListservice.formDirty$.subscribe(dirty => {
       this.isFormDirty = dirty;
 
-    });
+   });
+
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+   // this.sub.unsubscribe();
     this.formDirtySubscription.unsubscribe();
   }
 

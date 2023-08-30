@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder, ReactiveFor
 import { Subscriber, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { addIngredient } from '../store/shopping-list.actions';
 
 
 @Component({
@@ -21,7 +23,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   constructor(private shoppingListService: ShoppingListService,
     private fb: FormBuilder,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private store :Store) { }
   ingredientForm: FormGroup;
   ingredientSub: Subscription;
   formSubscription: Subscription;
@@ -76,7 +79,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     }
     else {
       const ingredient = new Ingredient(this.ingredientForm.value.name, this.ingredientForm.value.amount);
-      this.shoppingListService.addIngredient(ingredient);
+      //this.shoppingListService.addIngredient(ingredient);
+      this.store.dispatch(addIngredient({ingredient : ingredient}));
       
     }
     this.ingredientForm.reset();

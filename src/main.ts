@@ -16,6 +16,7 @@ import {
 } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { shoppingListReducer } from './app/shopping-list/store/shopping-list.reducer';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -28,7 +29,9 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideStore(),
+    provideStore(
+      {shoppingList: shoppingListReducer}
+    ),
     provideEffects()
 ],
 }).catch((err) => console.error(err));
