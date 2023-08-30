@@ -10,6 +10,7 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { AuthInterceptorService } from './app/login/auth-interceptor.service';
 import { PreloadAllModules, withPreloading } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './app/store/appStore.reducer';
 
 import {
   HTTP_INTERCEPTORS,
@@ -36,7 +37,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideStore({ shoppingList: shoppingListReducer }),
+    provideStore(appReducer),
     provideEffects(),
   ],
 }).catch((err) => console.error(err));

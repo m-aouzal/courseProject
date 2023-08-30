@@ -8,9 +8,7 @@ import { startEdit } from 'src/app/shopping-list/store/shopping-list.actions';
 import { stopEdit } from 'src/app/shopping-list/store/shopping-list.actions';
 
 // Define the initial state for the shopping list feature so that u can use an empty array of ingredients
-export interface AppState {
-  shoppingList: State;
-}
+
 
 export interface State {
   ingredients: Ingredient[];

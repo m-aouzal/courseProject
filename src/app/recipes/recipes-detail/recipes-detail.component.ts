@@ -5,7 +5,7 @@ import { RecipesService } from '../recipes.service';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import * as fromShoppingList from '../../shopping-list/store/shopping-list.reducer';
+import * as fromAppStore from '../../store/appStore.reducer';
 import { Store } from '@ngrx/store';
 import * as shoppingListActions from '../../shopping-list/store/shopping-list.actions'
 
@@ -25,7 +25,7 @@ export class RecipesDetailComponent implements OnInit {
      private recipeService: RecipesService,
       private route: ActivatedRoute,
       private router : Router,
-      private store:Store<fromShoppingList.AppState>) {}
+      private store:Store<fromAppStore.AppState>) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
