@@ -45,6 +45,8 @@ export const shoppingListReducer = createReducer(
     return {
       ...state,
       ingredients: updatedIngredients,
+      ingIndex: -1,
+      ingToEdit: null,
     };
   }),
   on(deleteIngredient, (state, action) => {
@@ -53,6 +55,8 @@ export const shoppingListReducer = createReducer(
     return {
       ...state,
       ingredients: updatedIngredients,
+      ingIndex: -1,
+      ingToEdit: null,
     };
   }),
   on(startEdit, (state, action) => {

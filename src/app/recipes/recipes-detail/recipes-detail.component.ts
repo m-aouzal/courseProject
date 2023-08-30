@@ -5,6 +5,10 @@ import { RecipesService } from '../recipes.service';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import * as fromShoppingList from '../../shopping-list/store/shopping-list.reducer';
+import { Store } from '@ngrx/store';
+import * as shoppingListActions from '../../shopping-list/store/shopping-list.actions'
+
 
 @Component({
     selector: 'app-recipes-detail',
@@ -20,7 +24,8 @@ export class RecipesDetailComponent implements OnInit {
   constructor(private shlService: ShoppingListService,
      private recipeService: RecipesService,
       private route: ActivatedRoute,
-      private router : Router) {}
+      private router : Router,
+      private store:Store<fromShoppingList.AppState>) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -37,7 +42,8 @@ export class RecipesDetailComponent implements OnInit {
   }
 
   toShoppingList() {
-    this.shlService.addIngredients(this.recipe.ingredients);
+    //this.shlService.addIngredients(this.recipe.ingredients);
+    this.store.dispatch(shoppingListActions.addIngredients({ingredients:this.recipe.ingredients}));
   }
   deleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
