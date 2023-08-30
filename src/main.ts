@@ -14,23 +14,21 @@ import {
   withInterceptorsFromDi,
   provideHttpClient,
 } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(
-      BrowserModule,
-      TooltipModule.forRoot(),
-      BsDropdownModule.forRoot(),
-     
-    ),
+    importProvidersFrom(BrowserModule, TooltipModule.forRoot(), BsDropdownModule.forRoot()),
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true,
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptorService,
+        multi: true,
     },
-    provideRouter(routes,
-        withPreloading(PreloadAllModules)),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
-  ],
+    provideStore(),
+    provideEffects()
+],
 }).catch((err) => console.error(err));
