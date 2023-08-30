@@ -19,7 +19,6 @@ import {
 } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { shoppingListReducer } from './app/shopping-list/store/shopping-list.reducer';
 
 bootstrapApplication(AppComponent, {
   providers: [

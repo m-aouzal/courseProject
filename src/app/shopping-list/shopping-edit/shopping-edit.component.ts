@@ -13,7 +13,7 @@ import { Subscriber, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
-import * as fromAppStore from '../../store/appStore.reducer';
+import * as fromApp from '../../store/appStore.reducer';
 import * as shoppingListActions from '../store/shopping-list.actions';
 
 
@@ -32,7 +32,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     private shoppingListService: ShoppingListService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private store: Store< fromAppStore.AppState>
+    private store: Store< fromApp.AppState>
   ) {}
   ingredientForm: FormGroup;
   ingredientSub: Subscription;

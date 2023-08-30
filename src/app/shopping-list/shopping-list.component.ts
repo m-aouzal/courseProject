@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
-import { Subscriber, Subscription,Observable } from 'rxjs';
+import {  Subscription,Observable } from 'rxjs';
 import { ComponentsForm } from '../ComponentsForm';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { Store } from '@ngrx/store';
-import * as fromAppStore from '../store/appStore.reducer';
+import * as fromApp from '../store/appStore.reducer';
 import { ingredientsSelector } from './store/shopping-list.selectors';
 import { startEdit } from './store/shopping-list.actions';
-import { AppState } from '../store/appStore.reducer';
+
 
 @Component({
     selector: 'app-shopping-list',
@@ -26,7 +26,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy,ComponentsForm,O
   formDirtySubscription: Subscription;
   isFormDirty: boolean = false;
   constructor(private shoppingListservice: ShoppingListService,
-    private store:Store<fromAppStore.AppState>) { }
+    private store:Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
     
