@@ -13,7 +13,7 @@ import { Subscriber, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { State } from '../store/shopping-list.reducer';
+import * as fromShoppingList from '../store/shopping-list.reducer';
 import * as shoppingListActions from '../store/shopping-list.actions';
 
 @Component({
@@ -31,7 +31,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     private shoppingListService: ShoppingListService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private store: Store<{ shoppingList: State }>
+    private store: Store< fromShoppingList.AppState>
   ) {}
   ingredientForm: FormGroup;
   ingredientSub: Subscription;
@@ -54,7 +54,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     });
 
     this.ingredientSub = this.store
-      .select('shoppingList')
+      .select("shoppingList")
       .subscribe((state) => {
         if (state.ingIndex > -1) {
           this.editMode = true;
