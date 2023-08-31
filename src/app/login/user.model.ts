@@ -5,7 +5,7 @@ export class User {
     private _token :string,
     private _tokenExpirationDate: Date,
     public status?: string,
-    public id?: number,
+    public id?: string,
     public username?: string
   ) {}
 
