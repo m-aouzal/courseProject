@@ -8,3 +8,9 @@ export const login = createAction(
 );
 
 export const logout = createAction('[login] logout');
+
+export const loginStart = createAction(
+  '[login] loginStart',
+  props<{ email: string; password: string }>()
+);
+
