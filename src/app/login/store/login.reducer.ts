@@ -4,27 +4,57 @@ import * as loginActions from './login.actions';
 
 export interface State {
   user: User;
+  errorMessage: string;
+  loadingSate: boolean;
 }
 
 const initialState: State = {
   user: null,
+  errorMessage: null,
+  loadingSate: false,
 };
 
 export const loginReducer = createReducer(
   initialState,
-  on(loginActions.login, (state, action) => {
-    console.log("login");
-    return {
+
+  on(loginActions.loginStart, (state, action) => ({
     ...state,
-    user: new User(
-      action.email,
-      action.userId,
-      action.token,
-    action.expiresIn
-    )}
-  }),
-  on(loginActions.logout, (state, action) => ({
+    errorMessage: null,
+    loadingSate: true,
+  })),
+  on(loginActions.loginFail, (state, action) => ({
     ...state,
     user: null,
-  }))
+    errorMessage: action.errorMessage,
+    loadingSate: false,
+  })),
+  on(loginActions.logout, (state, action) => {
+    return {
+      ...state,
+      user: null,
+    };
+  }),
+  on(loginActions.loginSucess, (state, action) => {
+    return {
+      ...state,
+      errorMessage: null,
+      loadingSate: false,
+      user: new User(
+        action.email,
+        action.userId,
+        action.token,
+        action.expiresIn
+      ),
+    };
+  }),
+  on(loginActions.signupStart, (state, action) => ({
+    ...state,
+    errorMessage: null,
+    loadingSate: true,
+  })),
+  on(loginActions.clearError, (state, action) => ({
+    ...state,
+    errorMessage: null,
+  })),
+  
 );

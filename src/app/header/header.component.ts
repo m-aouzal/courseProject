@@ -8,6 +8,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgIf } from '@angular/common';
 import { AppState } from '../store/appStore.reducer';
 import { Store } from '@ngrx/store';
+import * as LoginActions from '../login/store/login.actions';
 
 @Component({
   templateUrl: './header.component.html',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   fetchDataSubscription: Subscription;
   userSub: Subscription;
   isAuthenticated = false;
+  storeSub: Subscription;
   constructor(
     private usersService: UsersloginService,
     private router: Router,
@@ -29,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private store: Store<AppState>
   ) {}
   ngOnInit() {
-    this.store.select('login').subscribe((loginState) => {
+    this.storeSub = this.store.select('login').subscribe((loginState) => {
       this.isAuthenticated = !!loginState.user;
     });
     // this.userSub = this.userLoginService.userSubject.subscribe((user) => {
@@ -38,6 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
+    this.store.dispatch(LoginActions.logout());
     this.usersService.logout();
   }
 
@@ -59,6 +62,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // if (this.fetchDataSubscription) {
     //   this.fetchDataSubscription.unsubscribe();
     // }
-    this.userSub.unsubscribe();
+    this.storeSub.unsubscribe();
   }
 }

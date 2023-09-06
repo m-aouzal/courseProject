@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import FormBuilder and other necessary modules
 import { UsersloginService } from './users.login.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,11 @@ import { ComponentsForm } from '../ComponentsForm';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { AlertComponent } from '../shared/alert/alert.component';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/appStore.reducer';
+import * as LoginActions from './store/login.actions';
+import { Observable, Subscription } from 'rxjs';
+import { AuthResponseData } from './store/login.effects';
 
 @Component({
   standalone: true,
@@ -14,19 +19,22 @@ import { AlertComponent } from '../shared/alert/alert.component';
   templateUrl: './login.component.html', // Update with the correct template URL
   styleUrls: ['./login.component.css'], // Update with the correct style URL
 })
-export class LoginComponent implements ComponentsForm {
+export class LoginComponent implements ComponentsForm, OnInit, OnDestroy {
   loginForm: FormGroup; // Declare the form group
   signUpForm: FormGroup;
   authFailed: boolean = false;
   loading: boolean = false;
   loadingSignUp: boolean = false;
   loadingLogin: boolean = false;
-  error: string = null;
+  error: string;
+  authObservable: Observable<AuthResponseData>;
+  storeSub: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private usersService: UsersloginService,
-    private router: Router
+    private router: Router,
+    private store: Store<fromApp.AppState>
   ) {
     // Inject the FormBuilder service
 
@@ -41,7 +49,17 @@ export class LoginComponent implements ComponentsForm {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.storeSub = this.store.select('login').subscribe((loginState) => {
+      this.loadingLogin = loginState.loadingSate;
+      this.loadingSignUp = loginState.loadingSate;
+      this.error = loginState.errorMessage;
+    });
+  }
+
+  ngOnDestroy() {
+    this.storeSub.unsubscribe();
+  }
   verifyChangesAndConfirm(): boolean {
     return (
       !this.loginForm.dirty ||
@@ -60,91 +78,35 @@ export class LoginComponent implements ComponentsForm {
   }
 
   onHandleError() {
-    this.error = null;
+    this.store.dispatch(LoginActions.clearError());
   }
 
   private submitForm(mode: string) {
     this.loading = true;
     const formGroup = mode === 'signUp' ? this.signUpForm : this.loginForm;
-
     if (formGroup.invalid) {
       this.loading = false;
       return;
     }
 
     const formData = formGroup.value;
-    const authObservable =
-      mode === 'signUp'
-        ? this.usersService.signUp(formData.email, formData.password)
-        : this.usersService.login(formData.email, formData.password);
 
-    authObservable.subscribe({
-      next: (response) => {
-        this.loadingLogin = false;
-        this.loadingSignUp = false;
-        if (mode !== 'signUp') this.router.navigate(['/recipes']);
-        console.log(response);
-      },
-      error: (err) => {
-        this.error = err;
-        this.loadingLogin = false;
-        this.loadingSignUp = false;
-        console.log(err);
-      },
-    });
+    if (mode === 'login') {
+      this.store.dispatch(
+        LoginActions.loginStart({
+          email: formData.email,
+          password: formData.password,
+        })
+      );
+    } else {
+      this.store.dispatch(
+        LoginActions.signupStart({
+          email: formData.email,
+          password: formData.password,
+        })
+      );
+    }
     formGroup.reset();
   }
 }
 
-//     this.loadingLogin = true;
-//     const formData = form.value;
-//     this.usersService.login(formData.email, formData.password).subscribe({
-//       next: (response) => {
-//         setTimeout(() => {
-//           this.loading = false;
-//         }, 2000);
-//         console.log(response);
-//       },
-//       error: (err) => {
-//         setTimeout(() => {
-//           this.loading = false;
-//           this.error = err;
-//         }, 2000);
-//         console.log(err);
-//       },
-//     });
-//   }
-// }
-
-//   ngOnInit() {
-//     if (this.usersService.isAuthenticated()) {
-//       // User is already authenticated, redirect or perform an action
-//       this.router.navigate(['/recipes']); // Example: Redirect to dashboard
-//     }
-//   }
-//   onSubmit() {
-//     this.loading = true; // Set loading to true
-
-//     if (this.loginForm.valid) {
-//       const formData = this.loginForm.value;
-
-//       this.usersService.authenticateUser(formData.email, formData.password)
-//         .then(userExists => {
-//           if (userExists) {
-//             this.authFailed = false;
-//             this.router.navigate(['/recipes']);
-//             // Perform any further actions, like navigation or setting authentication state
-//           } else {
-//             this.resetAuthentication();
-//           }
-//           this.loading = false; // Set loading to false after async operation completes
-//         });
-//     }
-//   }
-
-//   resetAuthentication() {
-//     this.authFailed = true;
-//     this.loginForm.reset();
-//   }
-
-// }

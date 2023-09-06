@@ -86,7 +86,10 @@
     </div>
 
     <div class="login">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmitLogin()"
+      >
         <label for="chk" aria-hidden="true">Login</label>
         <input
           type="email"
@@ -140,7 +143,7 @@
             </div>
           </div> -->
         <div *ngIf="!loadingLogin">
-          <button type="submit" [disabled]="loginForm.invalid">Login</button>
+          <button  class="btn" type="submit" [disabled]="loginForm.invalid">Login</button>
         </div>
       </form>
 
