@@ -8,9 +8,11 @@ export const blockLoginGuard: CanActivateFn = (route, state) => {
   
   // If the user is logged in, prevent access and navigate to login page
   if (localStorage.getItem('userData')) {
+   
+    
     router.navigate(['/recipes']); // Change this to the restricted page URL
     return false;
   }
-  
+
   return true; // Allow access for non-logged in users
 };

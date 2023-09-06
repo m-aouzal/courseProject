@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { UsersloginService } from './login/users.login.service';
 import { HeaderComponent } from './header/header.component';
 import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    standalone: true,
-    imports: [
-        NgIf,
-        HeaderComponent,
-        NgClass,
-        RouterOutlet,
-    ],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [NgIf, HeaderComponent, NgClass, RouterOutlet],
 })
 export class AppComponent {
   pageNotFound: boolean = false;
@@ -26,11 +27,11 @@ export class AppComponent {
     private route: ActivatedRoute,
     private userService: UsersloginService,
     private router2: Router,
-    private userLoginService : UsersloginService
+    private userLoginService: UsersloginService
   ) {}
 
   ngOnInit() {
-    this.userLoginService.autoLogin();
+    //this.userLoginService.autoLogin();
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
