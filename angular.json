@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/course-project",
+            "outputPath": "dist/courseProject/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -60,7 +60,8 @@
             },
             "development": {
               "browserTarget": "courseProject:build:development",
-              "port":5100
+              "port": 5100
+              
             }
           },
           "defaultConfiguration": "development"
@@ -80,6 +81,58 @@
             "styles": ["src/styles.css"],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/courseProject/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "courseProject:build:development",
+              "serverTarget": "courseProject:server:development"
+            },
+            "production": {
+              "browserTarget": "courseProject:build:production",
+              "serverTarget": "courseProject:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "courseProject:build:production",
+              "serverTarget": "courseProject:server:production"
+            },
+            "development": {
+              "browserTarget": "courseProject:build:development",
+              "serverTarget": "courseProject:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
