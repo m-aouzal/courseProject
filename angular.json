@@ -59,7 +59,8 @@
               "browserTarget": "courseProject:build:production"
             },
             "development": {
-              "browserTarget": "courseProject:build:development"
+              "browserTarget": "courseProject:build:development",
+              "port":5100
             }
           },
           "defaultConfiguration": "development"
