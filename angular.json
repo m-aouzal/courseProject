@@ -60,7 +60,9 @@
             },
             "development": {
               "browserTarget": "courseProject:build:development",
+
               "port": 4300
+
             }
           },
           "defaultConfiguration": "development"
