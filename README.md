@@ -1,5 +1,5 @@
 Italian's Recipe Book
-#### Video Demo: [ <URL HERE>](https://youtu.be/kTD5kqCMCA0)
+#### Video Demo: https://youtu.be/kTD5kqCMCA0
 #### Description:
 Hello everyone! Today, I am thrilled to share with you the journey of my CS50 final project, a creation that marries my passion for programming with my love for Italian cuisine. But before I delve into the details, I want to express my gratitude to CS50 for providing one of the best online courses for free. This course has been truly inspiring, shaping my understanding of computer science and equipping me with the skills needed for this project.
 
